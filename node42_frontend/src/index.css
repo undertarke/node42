@@ -1,0 +1,472 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(114, 113, 113);
+  border-radius: 10px;
+  height: 200px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.category-btn:hover {
+  background-color: #FC1503 !important;
+  color: white !important;
+}
+
+.category-btn:hover span {
+  color: white !important;
+}
+
+.react-player {
+  height: 77vh !important;
+  width: 100% !important;
+}
+
+.search-bar {
+  border: none;
+  outline: none;
+  width: 350px;
+}
+
+.category-btn {
+  font-weight: bold !important;
+  text-transform: capitalize;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  cursor: pointer;
+  background: transparent;
+  outline: none;
+  border: none;
+
+  padding: 7px 15px;
+  margin: 10px 0px;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+
+@media screen and (max-width: 900px) {
+  .category-btn {
+    margin: 10px;
+  }
+}
+
+@media screen and (max-width:800px) {
+  .copyright {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .scroll-horizontal {
+    overflow: auto !important;
+  }
+
+  .react-player {
+    height: 45vh !important;
+  }
+
+  .search-bar {
+    width: 200px;
+  }
+}
+
+
+
+
+ody {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Button used to open the chat form - fixed at the bottom of the page */
+.open-button {
+  background-color: #0374d8;
+  color: white;
+  font-size: 24px;
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
+  position: fixed;
+  bottom: 10px;
+  right: 25px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  z-index: 2;
+}
+
+/* The popup chat - hidden by default */
+.chat-popup {
+  display: none;
+  position: fixed;
+  bottom: 80px;
+  right: 60px;
+  border: 1px solid #f1f1f1;
+  z-index: 9;
+  border-radius: 10px;
+}
+
+.chatHead {
+  display: flex;
+  flex-direction: row;
+  background: #0374d8;
+  min-height: 40px;
+  width: 100%;
+  verticle-align: middle;
+  color: white;
+  border-radius: 10px 10px 0 0;
+
+}
+
+.chatName {
+  font-size: 14px;
+  padding-left: 10px;
+  align-self: flex-start;
+  flex: 1;
+}
+
+.chatClose {
+  background: none;
+  border: 0;
+  justify-content: flex-end;
+  align-items: flex-end;
+  align-content: flex-end;
+  color: white;
+  font-size: 20px;
+}
+
+.sendbtn {
+  background: none;
+  border: 0;
+  justify-content: flex-end;
+  align-items: flex-end;
+  align-content: flex-end;
+  color: #0374d8;
+  font-size: 20px;
+}
+
+.chatBubble {
+  background-color: #f1f0f0;
+  border-radius: 1.3em;
+  color: rgba(0, 0, 0, 1);
+  display: inline-block;
+  font-size: 11pt;
+  max-width: 260px;
+  padding: 8px 12px;
+  text-align: left;
+  width: fit-content;
+  word-wrap: break-word;
+}
+
+.profileImg {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+.ip4 {
+  border-radius: 15px 50px 30px;
+  border: 1px solid #0374d8;
+  padding: 20px;
+  max-width: 200px;
+  height: 15px;
+  margin: 5px;
+}
+
+.chatArea {
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+  padding: 10px;
+  background-color: white;
+}
+
+/* Add styles to the form container */
+.form-container {
+  max-width: 300px;
+  padding: 10px;
+  background-color: white;
+}
+
+/* Full-width textarea */
+.form-container textarea {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+  resize: none;
+  min-height: 200px;
+}
+
+/* When the textarea gets focus, do something */
+.form-container textarea:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for the submit/send button */
+.form-container .btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom: 10px;
+  opacity: 0.8;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover,
+.open-button:hover {
+  opacity: 1;
+}
+
+
+
+@import url(http://weloveiconfonts.com/api/?family=typicons);
+
+[class*="typicons-"]:before {
+  font-family: 'Typicons', sans-serif;
+}
+
+.module {
+  width: 300px;
+  margin: 20px auto;
+}
+
+.top-bar {
+  background: #666;
+  color: white;
+  padding: 0.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.top-bar h1 {
+  display: inline;
+  font-size: 1.1rem;
+}
+
+.top-bar .typicons-message {
+  display: inline-block;
+  padding: 4px 5px 2px 5px;
+}
+
+.top-bar .typicons-minus {
+  position: relative;
+  top: 3px;
+}
+
+.top-bar .left {
+  float: left;
+}
+
+.top-bar .right {
+  float: right;
+  padding-top: 5px;
+}
+
+.top-bar>* {
+  position: relative;
+}
+
+.top-bar::before {
+  content: "";
+  position: absolute;
+  top: -100%;
+  left: 0;
+  right: 0;
+  bottom: -100%;
+  opacity: 0.25;
+  background: radial-gradient(#ffffff, #000000);
+  animation: pulse 1s ease alternate infinite;
+}
+
+.discussion {
+  list-style: none;
+  background: #e5e5e5;
+  margin: 0;
+  padding: 0;
+  width: 300px;
+  min-height: 350px;
+  height: 350px;
+  overflow-y: scroll;
+}
+
+.discussion li {
+  padding: 0.5rem;
+  overflow: hidden;
+  display: flex;
+}
+
+.discussion .avatar {
+  width: 40px;
+  position: relative;
+}
+
+.discussion .avatar img {
+  display: block;
+  width: 100%;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+}
+
+.discussion .other .avatar img {
+  margin-right: 10px;
+}
+
+.discussion .self .avatar img {
+  margin-left: 10px;
+}
+
+.other .avatar:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border: 5px solid white;
+  border-left-color: transparent;
+  border-bottom-color: transparent;
+}
+
+.self {
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.self .messages {
+  order: 1;
+  border-bottom-right-radius: 0;
+}
+
+.self .avatar {
+  order: 2;
+}
+
+.self .avatar:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border: 5px solid white;
+  border-right-color: transparent;
+  border-top-color: transparent;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.messages {
+  min-width: 100px;
+  background: white;
+  padding: 10px;
+  border-radius: 2px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.messages p {
+  font-size: 0.8rem;
+  margin: 0 0 0.2rem 0;
+}
+
+.messages time {
+  font-size: 0.7rem;
+  color: #ccc;
+}
+
+.chatBottom {
+  height: 50px;
+  padding: 5px;
+  display: flex;
+}
+
+.sendText {
+  flex: 1;
+  border: 1px solid #0374d8;
+  border-radius: 20px;
+}
+
+:focus {
+  outline: none;
+}
+
+@keyframes pulse {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 0.5;
+  }
+}
+
+
+
+/* chat */
+
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}

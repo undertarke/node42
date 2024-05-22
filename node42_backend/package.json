@@ -5,10 +5,12 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "start": "node --watch index.js"
+    "start": "node --watch src/index.js"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.19.2",
+    "mysql2": "^3.9.7",
     "nodemon": "^3.1.0"
   }
 }

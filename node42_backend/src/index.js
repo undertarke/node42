@@ -12,13 +12,24 @@
 // B4: yarn add express
 
 import express from 'express'
+import rootRouter from './routes/rootRouter.js'
+import cors from 'cors'
+
 const app = express()
 
 // middleware => trước khi nhận request từ FE
 app.use(express.json())
 
+// mở chặn CORS => yarn add cors
+app.use(cors({
+    origin: "*" // tất cả domain truy cập
+}))
+
 // khởi tạo server BE chạy bằng framework Express
 app.listen(8080)
+
+app.use(rootRouter)
+
 
 // chỉ sử dụng môi trường Developer
 // yarn add nodemon => watching => auto restart server
@@ -47,7 +58,7 @@ app.get("/demo/:id/:hoTen", (request, response) => {
 
     // - nhận bằng json
     // body
-    let { email,phone,diaChi } = request.body;
+    let { email, phone, diaChi } = request.body;
 
     // ES6: object literal => lượt bỏ tên biến trùng với tẹn thuộc tính
 
@@ -57,7 +68,41 @@ app.get("/demo/:id/:hoTen", (request, response) => {
         {
             id,
             hoTen,
-            email,phone,diaChi 
+            email, phone, diaChi
         }
     ) // bất kỳ kiểu data gì trừ number
+})
+
+
+// chuỗi kết nối CSDL: host, username, password, port, dialect
+// truy vấn dữ liệu: CRUD table
+
+// yarn add mysql2
+
+
+// truy vấn table nguoi_dung
+// ORM
+// localhost:8080/video/get-video
+
+
+
+
+/* 
+    Model: object => Sequelize ORM
+   
+    Controller: xử lý logic, tính toán, truy xuất CSDL,...
+    
+    Router: quản lý API, quản lý đối tượng endpoint
+
+*/
+
+
+import mysql from 'mysql2'
+
+const connect = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "1234",
+    port: "3306",
+    database: "db_youtube"
 })
