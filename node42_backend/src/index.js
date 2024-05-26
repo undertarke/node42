@@ -96,13 +96,3 @@ app.get("/demo/:id/:hoTen", (request, response) => {
 
 */
 
-
-import mysql from 'mysql2'
-
-const connect = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "1234",
-    port: "3306",
-    database: "db_youtube"
-})
