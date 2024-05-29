@@ -12,12 +12,18 @@
 // yarn add sequelize
 
 import { Sequelize } from 'sequelize'
+import config from '../config/config.js'
 
-const sequelize = new Sequelize("db_youtube", "root", "1234", {
-    host: "localhost",
-    port: "3306",
-    dialect: "mysql"
-})
+const sequelize = new Sequelize(
+    config.db_database,
+    config.db_user,
+    config.db_password,
+    {
+        host: config.db_host,
+        port: config.db_port,
+        dialect: config.db_dialect,
+    }
+)
 
 export default sequelize
 

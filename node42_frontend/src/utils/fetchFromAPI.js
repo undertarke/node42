@@ -22,7 +22,22 @@ export const fetchFromAPI = async (url) => {
 };
 
 export const getVideoAPI = async () => {
-  const { data } = await axios.get(`http://localhost:8080/get-video`);
+  const { data } = await axios.get(`${BASE_URL}/video/get-video`);
+
+  return data
+}
+
+
+export const getVideoTypeAPI = async () => {
+  const { data } = await axios.get(`${BASE_URL}/video/get-video-type`);
+
+  return data
+}
+
+
+
+export const getVideoWithTypeAPI = async (typeId) => {
+  const { data } = await axios.get(`${BASE_URL}/video/get-video-with-type/${typeId}`);
 
   return data
 }
