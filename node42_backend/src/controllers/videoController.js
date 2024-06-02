@@ -2,6 +2,7 @@ import Video from "../models/video.js"
 
 import initModels from "../models/init-models.js"
 import sequelize from "../models/connect.js"
+import { responseSend } from "../config/response.js"
 
 let model = initModels(sequelize)
 
@@ -26,13 +27,16 @@ const getVideo = async (req, res) => {
     let data = await model.video.findAll({
         include: ["type", "user"]
     })
-    res.send(data);
+    // res.send(data);
+    responseSend(res, data, "Thành công !", 200)
 }
 
 const getVideoType = async (req, res) => {
     let data = await model.video_type.findAll()
 
-    res.send(data);
+    // res.send(data);
+    responseSend(res, data, "Thành công !", 200)
+
 }
 
 const getVideoWithType = async (req, res) => {
@@ -45,13 +49,15 @@ const getVideoWithType = async (req, res) => {
         }
     })
 
-    res.send(data)
+    // res.send(data)
+    responseSend(res, data, "Thành công !", 200)
+
 }
 
 
 
 const createVideo = (req, res) => {
-    res.send("Create Video")
+    // res.send("Create Video")
 
 }
 
@@ -69,8 +75,11 @@ const getVideoPage = async (req, res) => {
 
     let listItem = await model.video.count();
     let listPage = Math.ceil(listItem / pageSize)
-    
-    res.send({ data, listPage })
+
+    // res.send({ data, listPage })
+
+    responseSend(res, { data, listPage }, "Thành công !", 200)
+
 }
 
 export {

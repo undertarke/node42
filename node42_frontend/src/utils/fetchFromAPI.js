@@ -18,20 +18,20 @@ const options = {
 export const fetchFromAPI = async (url) => {
   const { data } = await axios.get(`${BASE_URL}/${url}`, options);
 
-  return data;
+  return data.content;
 };
 
 export const getVideoAPI = async () => {
   const { data } = await axios.get(`${BASE_URL}/video/get-video`);
 
-  return data
+  return data.content
 }
 
 
 export const getVideoTypeAPI = async () => {
   const { data } = await axios.get(`${BASE_URL}/video/get-video-type`);
 
-  return data
+  return data.content
 }
 
 
@@ -39,5 +39,5 @@ export const getVideoTypeAPI = async () => {
 export const getVideoWithTypeAPI = async (typeId) => {
   const { data } = await axios.get(`${BASE_URL}/video/get-video-with-type/${typeId}`);
 
-  return data
+  return data.content
 }
