@@ -41,3 +41,9 @@ export const getVideoWithTypeAPI = async (typeId) => {
 
   return data.content
 }
+
+export const getVideoPageAPI = async (page) => {
+  const { data } = await axios.get(`${BASE_URL}/video/get-video-page/${page}`);
+
+  return data.content // {data, listPage}
+}
