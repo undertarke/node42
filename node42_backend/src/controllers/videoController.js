@@ -62,7 +62,9 @@ const createVideo = (req, res) => {
 }
 
 const getVideoPage = async (req, res) => {
+    
     let { page } = req.params
+    
     let pageSize = 3
     let index = (page - 1) * pageSize
 
@@ -82,10 +84,21 @@ const getVideoPage = async (req, res) => {
 
 }
 
+const getVideoById = async (req, res) => {
+    let { videoId } = req.params
+
+    let data = await model.video.findByPk(videoId, {
+        include: ["user"]
+    })
+
+    responseSend(res, data, "Thành công !", 200)
+}
+
 export {
     getVideo,
     createVideo,
     getVideoType,
     getVideoWithType,
-    getVideoPage
+    getVideoPage,
+    getVideoById
 }

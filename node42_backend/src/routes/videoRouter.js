@@ -1,6 +1,6 @@
 import express from "express";
 
-import { createVideo, getVideo, getVideoType, getVideoWithType, getVideoPage } from "../controllers/videoController.js";
+import { createVideo, getVideo, getVideoType, getVideoWithType, getVideoPage, getVideoById } from "../controllers/videoController.js";
 
 const videoRouter = express.Router();
 
@@ -16,7 +16,8 @@ videoRouter.get("/get-video-with-type/:typeId", getVideoWithType)
 // API get video page
 videoRouter.get("/get-video-page/:page", getVideoPage)
 
-// API create video
-videoRouter.post("/create-video", createVideo)
+// API get video by id
+videoRouter.get("/get-video-by-id/:videoId", getVideoById)
+
 
 export default videoRouter
