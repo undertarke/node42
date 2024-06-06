@@ -1,24 +1,29 @@
 import initModels from "../models/init-models.js"
 import sequelize from "../models/connect.js"
 import { responseSend } from "../config/response.js"
+import bcrypt from 'bcrypt'
+import { createToken } from "../config/jwt.js"
 
 let model = initModels(sequelize)
 
-const signUp = async (req, res) => {å
+const signUp = async (req, res) => {
     let { email, password, fullName } = req.body
-
     // check email tồn tại => 403
 
-    //
-    let model = {
+    // yarn add bcrypt 
+    let newUser = {
         email,
-        pass_word: password, // mã hóa password => hash password
+        pass_word: bcrypt.hashSync(password, 10), // mã hóa password => hash password một chiều
         full_name: fullName,
-
-
+        avatar: "",
+        face_app_id: "",
+        role: "USER",
+        refresh_token: ""
     }
 
+    await model.users.create(newUser)
     // model.user.create(model)
+    responseSend(res, "", "Thành công !", 200)
 
     // => 200
 }
@@ -26,13 +31,18 @@ const signUp = async (req, res) => {å
 const login = async (req, res) => {
     let { email, password } = req.body
 
+
     let checkUser = await model.users.findOne({
-        email
+        where: { email }
     })
     // []
     if (checkUser) {
-        if (checkUser.pass_word == password) {
-            let token = "";
+        if (bcrypt.compareSync(password, checkUser.pass_word)) {
+
+            // yarn add jsonwebtoken
+
+            let token = createToken({ userId: checkUser.dataValues.user_id });
+
             // login thành công
             responseSend(res, token, "Thành công !", 200)
         } else {

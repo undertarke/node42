@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { Box, CardMedia } from "@mui/material";
 
 import { Videos, ChannelCard } from ".";
+import { loginAPI } from "../utils/fetchFromAPI";
 
 
 
@@ -29,8 +30,22 @@ const Login = () => {
           <input className="form-control" id="pass" />
         </div>
         <div className="col-12">
-          <button type="button" className="btn btn-primary" >Login</button>
-         
+
+          <button onClick={() => {
+            let email = document.querySelector("#email").value
+            let password = document.querySelector("#pass").value
+
+            loginAPI({ email, password  }).then(result => {
+              alert("Login thành công")
+
+              localStorage.setItem("LOGIN_USER", result) // save token
+              window.location.reload()
+              
+            }).catch(error => {
+              alert(error.response.data.message)
+            })
+          }} type="button" className="btn btn-primary" >Login</button>
+
         </div>
       </form>
     </div>

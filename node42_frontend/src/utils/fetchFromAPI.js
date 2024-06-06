@@ -55,5 +55,16 @@ export const getVideoPageAPI = async (page) => {
 export const getVideoByIdAPI = async (videoId) => {
   const { data } = await axios.get(`${BASE_URL}/video/get-video-by-id/${videoId}`);
 
-  return data.content 
+  return data.content
+}
+
+
+
+
+
+// API get video by id
+export const loginAPI = async (model) => {
+  const { data } = await axios.post(`${BASE_URL}/user/login`, model);
+
+  return data.content // token
 }
