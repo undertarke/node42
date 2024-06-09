@@ -1,11 +1,18 @@
 import express from "express";
 
 import { createVideo, getVideo, getVideoType, getVideoWithType, getVideoPage, getVideoById } from "../controllers/videoController.js";
+import { middleToken } from "../config/jwt.js";
 
 const videoRouter = express.Router();
 
 // API chức năng
-videoRouter.get("/get-video", getVideo)
+videoRouter.get("/get-video", middleToken, getVideo)
+
+
+
+
+
+
 
 // API get video-type
 videoRouter.get("/get-video-type", getVideoType)

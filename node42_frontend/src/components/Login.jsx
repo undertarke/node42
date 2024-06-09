@@ -3,8 +3,8 @@ import { useParams } from "react-router-dom";
 import { Box, CardMedia } from "@mui/material";
 
 import { Videos, ChannelCard } from ".";
-import { loginAPI } from "../utils/fetchFromAPI";
-
+import { loginAPI, loginFaceAPI } from "../utils/fetchFromAPI";
+import ReactFacebookLogin from "react-facebook-login";
 
 
 const Login = () => {
@@ -35,18 +35,41 @@ const Login = () => {
             let email = document.querySelector("#email").value
             let password = document.querySelector("#pass").value
 
-            loginAPI({ email, password  }).then(result => {
+            loginAPI({ email, password }).then(result => {
               alert("Login thành công")
 
               localStorage.setItem("LOGIN_USER", result) // save token
               window.location.reload()
-              
+
             }).catch(error => {
               alert(error.response.data.message)
             })
           }} type="button" className="btn btn-primary" >Login</button>
 
         </div>
+
+        <ReactFacebookLogin
+
+          appId="312062695290384"
+          fields="name,email,picture"
+          callback={(response) => {
+
+            let newUser = {
+              ...response,
+              face_app_id: response.id
+            }
+
+            loginFaceAPI(newUser).then(result => {
+              alert("Login thành công")
+
+              localStorage.setItem("LOGIN_USER", result) // save token
+              window.location.reload()
+
+            })
+
+          }}
+        />
+
       </form>
     </div>
   </div>

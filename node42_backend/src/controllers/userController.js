@@ -58,7 +58,49 @@ const login = async (req, res) => {
 
 }
 
+const loginFacebook = async (req, res) => {
+    let { face_app_id, name, email } = req.body
+
+    // check id 
+
+    let checkUser = await model.users.findOne({
+        where: {
+            face_app_id
+        }
+    })
+
+    if (!checkUser) {
+        //signUp
+
+        let newUser = {
+            email,
+            pass_word: "",
+            full_name: name,
+            avatar: "",
+            face_app_id,
+            role: "USER",
+            refresh_token: ""
+        }
+
+        await model.users.create(newUser)
+
+        // lấy được user_id mới
+        checkUser = await model.users.findOne({
+            where: {
+                face_app_id
+            }
+        })
+    }
+
+    let token = createToken({ userId: checkUser.dataValues.user_id });
+
+    // login thành công
+    responseSend(res, token, "Thành công !", 200)
+
+}
+
 export {
     signUp,
-    login
+    login,
+    loginFacebook
 }
