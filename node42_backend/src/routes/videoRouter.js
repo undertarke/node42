@@ -6,7 +6,7 @@ import { middleToken } from "../config/jwt.js";
 const videoRouter = express.Router();
 
 // API chức năng
-videoRouter.get("/get-video", middleToken, getVideo)
+videoRouter.get("/get-video", getVideo)
 
 
 

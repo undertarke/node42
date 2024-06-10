@@ -1,0 +1,273 @@
+{
+	"info": {
+		"_postman_id": "aa87bdfd-3b13-45bc-857a-098e01e8a0ec",
+		"name": "node42",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10551149",
+		"_collection_link": "https://martian-crater-545308.postman.co/workspace/Team-Workspace~cc5924ef-aba0-468f-87a1-115ad14eee4b/collection/10551149-aa87bdfd-3b13-45bc-857a-098e01e8a0ec?action=share&source=collection_link&creator=10551149"
+	},
+	"item": [
+		{
+			"name": "localhost:8080/nguoi-dung/login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"admin@gmail.com\",\n    \"so_dien_thoai\":\"0906935483\",\n    \"mat_khau\":\"1234\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/nguoi-dung/login",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"nguoi-dung",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get video",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJJZCI6OH0sImlhdCI6MTcxNzkwMDg1NywiZXhwIjoxNzE3OTAxMTU3fQ.cnl_z-Om6Aj-pC1bcpwx7SdJiZlvQOKCaWO1KpY1f_M"
+					}
+				],
+				"url": {
+					"raw": "{{domain}}/video/get-video",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"video",
+						"get-video"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"mono@gmail.com\",\n    \"password\": \"1234\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domain}}/user/login",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/video/get-video-type",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/video/get-video-type",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"video",
+						"get-video-type"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/video/get-video-with-type/3",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/video/get-video-with-type/3",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"video",
+						"get-video-with-type",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/video/get-video-page/3",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/video/get-video-page/3",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"video",
+						"get-video-page",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/video/get-video-by-id/3",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/video/get-video-by-id/3",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"video",
+						"get-video-by-id",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/user/sign-up",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n     \"email\": \"test2@gmail.com\",\n    \"password\": \"1234\",\n    \"fullName\":\"test\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/user/sign-up",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"sign-up"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/bang-diem/bang-diem-chi-tiet-danh-muc/3",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/bang-diem/bang-diem-chi-tiet-danh-muc/3",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bang-diem",
+						"bang-diem-chi-tiet-danh-muc",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/user/login-facebook",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"face_app_id\": \"7592287040819543\",\n    \"name\": \"Sang\",\n    \"email\": \"sangrom2003@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/user/login-facebook",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"login-facebook"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "domain",
+			"value": "localhost:8080",
+			"type": "string"
+		}
+	]
+}
