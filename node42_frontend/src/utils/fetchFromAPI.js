@@ -22,14 +22,14 @@ export const fetchFromAPI = async (url) => {
 };
 
 export const getVideoAPI = async () => {
-  const { data } = await axios.get(`${BASE_URL}/video/get-video`,options);
+  const { data } = await axios.get(`${BASE_URL}/video/get-video`, options);
 
   return data.content
 }
 
 
 export const getVideoTypeAPI = async () => {
-  const { data } = await axios.get(`${BASE_URL}/video/get-video-type`,options);
+  const { data } = await axios.get(`${BASE_URL}/video/get-video-type`, options);
 
   return data.content
 }
@@ -37,13 +37,13 @@ export const getVideoTypeAPI = async () => {
 
 
 export const getVideoWithTypeAPI = async (typeId) => {
-  const { data } = await axios.get(`${BASE_URL}/video/get-video-with-type/${typeId}`,options);
+  const { data } = await axios.get(`${BASE_URL}/video/get-video-with-type/${typeId}`, options);
 
   return data.content
 }
 
 export const getVideoPageAPI = async (page) => {
-  const { data } = await axios.get(`${BASE_URL}/video/get-video-page/${page}`,options);
+  const { data } = await axios.get(`${BASE_URL}/video/get-video-page/${page}`, options);
 
   return data.content // {data, listPage}
 }
@@ -53,7 +53,7 @@ export const getVideoPageAPI = async (page) => {
 
 // API get video by id
 export const getVideoByIdAPI = async (videoId) => {
-  const { data } = await axios.get(`${BASE_URL}/video/get-video-by-id/${videoId}`,options);
+  const { data } = await axios.get(`${BASE_URL}/video/get-video-by-id/${videoId}`, options);
 
   return data.content
 }
@@ -74,4 +74,9 @@ export const loginFaceAPI = async (model) => {
   const { data } = await axios.post(`${BASE_URL}/user/login-facebook`, model);
 
   return data.content // token
+}
+
+export const uploadCloudinary = async (formData) => {
+  const { data } = await axios.post(`https://api.cloudinary.com/v1_1/dghvdbogx/upload`,formData)
+  return data
 }

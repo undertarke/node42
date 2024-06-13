@@ -17,6 +17,8 @@ import cors from 'cors'
 
 const app = express()
 
+app.use(express.static(".")) // định vị lại đường dẫn load tài nguyên
+
 // middleware => trước khi nhận request từ FE
 app.use(express.json())
 
