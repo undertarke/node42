@@ -23,24 +23,11 @@ videoRouter.get("/get-video-page/:page", getVideoPage)
 videoRouter.get("/get-video-by-id/:videoId", getVideoById)
 
 
+// FILE SYSTEM
+import fs from 'fs'
+import { upload } from "../config/upload.js";
 
 
-
-import multer, { diskStorage } from 'multer'
-
-// yarn add multer
-
-const upload = multer({
-    storage: diskStorage({
-        destination: process.cwd() + "/public/img", // nơi khai báo đường dẫn lưu file
-        filename: (req, file, callback) => {  // đổi tên file
-
-            // lưu ý nhảy audition =>>> 156234234325_●◉✿๖ۣۜLiên Kích ✘Liên Kích Đẹpッ✿◉●
-            let date = new Date()
-            callback(null, date.getTime() + "_" + file.originalname) // 1718200974007_cat.jpeg
-        }
-    })
-})
 
 videoRouter.post("/upload", upload.single("hinhAnh"), (req, res) => {
     let file = req.file
@@ -48,7 +35,41 @@ videoRouter.post("/upload", upload.single("hinhAnh"), (req, res) => {
     res.send(file)
 })
 
+import compress_images from 'compress-images'
 
+videoRouter.post("/demo-upload", upload.single("upload"), (req, res) => {
+    let { file } = req;
+    // tối ưu hình
+    // image > 700KB
+    compress_images(
+        process.cwd() + "/public/img/" + file.filename,
+        process.cwd() + "/public/img_com/",
+        { compress_force: false, statistic: true, autoupdate: true }, false,
+        { jpg: { engine: "mozjpeg", command: ["-quality", "15"] } },
+        { png: { engine: "pngquant", command: ["--quality=10-30", "-o"] } },
+        { svg: { engine: "svgo", command: "--multipass" } },
+        { gif: { engine: "gifsicle", command: ["--colors", "64", "--use-col=web"] } },
+        function (error, completed, statistic) {
+            // xóa hình chưa tối ưu
+        }
+    );
+
+    // tạo file data.txt => hello CAT
+    //fs.writeFile(process.cwd() + "/data.txt", "hello CAT", (err) => { })
+    // let error = fs.writeFileSync(process.cwd() + "/data.txt", "hello CAT")
+
+
+    // tạo hình base64
+    // fs.readFile(process.cwd() + "/public/img/" + file.filename, (err, data) => {
+
+    //     let base64 = Buffer.from(data).toString("base64")
+    //     let image = `data:${file.mimetype};base64,${base64}`
+
+    //     res.send(image)
+
+    // })
+
+})
 
 
 

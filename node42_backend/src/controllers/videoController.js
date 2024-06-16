@@ -4,32 +4,48 @@ import initModels from "../models/init-models.js"
 import sequelize from "../models/connect.js"
 import { responseSend } from "../config/response.js"
 
+import { PrismaClient } from "@prisma/client"
+
 let model = initModels(sequelize)
 
-// sequelize.query("SELECT * FROM video ")
+let modelPrisma = new PrismaClient()
 
-// SELECT * FROM video 
-// localhost:8080/video/get-video
 const getVideo = async (req, res) => {
-    // SELECT * FROM Video WHERE video_id = 2
-    // [{},{},{}]
-    // {}
-    // video JOIN video_type
-    // video JOIN user
-    // let data2 = await model.video.findOne({
-    //     where: {
-    //         video_id: 2
-    //     }
-    // })
-    // // tìm kiếm theo primary key
-    // let data3 = await model.video.findByPk(2)
 
+    // SELECT * FROM video
     let data = await model.video.findAll({
         include: ["type", "user"]
     })
-    // res.send(data);
+
+    data = await modelPrisma.video.findMany({
+        include: {
+            video_comment: {
+                include: {
+                    users: true,
+                }
+            },
+        }
+    })
+
+    //sequelize
+    // model.video.create(newData)
+    // model.video.update(newData, where)
+    // model.video.destroy({ where })
+
+    // // prisma
+    // modelPrisma.video.create({ data: newData })
+    // modelPrisma.video.update({ data: newData, where })
+    // modelPrisma.video.delete({ where })
+
     responseSend(res, data, "Thành công !", 200)
 }
+
+
+
+
+
+
+
 
 const getVideoType = async (req, res) => {
     let data = await model.video_type.findAll()
@@ -62,9 +78,9 @@ const createVideo = (req, res) => {
 }
 
 const getVideoPage = async (req, res) => {
-    
+
     let { page } = req.params
-    
+
     let pageSize = 3
     let index = (page - 1) * pageSize
 

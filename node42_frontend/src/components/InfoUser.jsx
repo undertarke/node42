@@ -6,7 +6,7 @@ import { Videos, ChannelCard } from ".";
 
 import ReactPlayer from "react-player";
 import { DOMAIN_BE_IMG } from "../utils/constants";
-import { uploadCloudinary } from "../utils/fetchFromAPI";
+import { DOMAIN_IMG, uploadCloudinary } from "../utils/fetchFromAPI";
 
 const InfoUser = () => {
   const [channelDetail, setChannelDetail] = useState();
@@ -34,7 +34,7 @@ const InfoUser = () => {
       <div className="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabIndex={0}>
         <div className="row">
           <div className="col-2">
-            <img className="rounded-circle" src={avatar} width="100%" />
+            <img className="rounded-circle" src={`${DOMAIN_IMG}/1718507657417_cat.jpeg`} width="100%" />
 
             <input className="form-control" type="file" id="formFile"
               onChange={() => {

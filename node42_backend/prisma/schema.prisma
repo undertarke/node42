@@ -1,0 +1,26 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+
+model Nguoi_Dung {
+  ma_nguoi_dung Int @id @default(autoincrement())
+  ten_nguoi_dung String
+
+  ma_hoi_vien Int
+
+  hoi_vien Hoi_Vien @relation(fields: [ma_hoi_vien],references: [ma_hoi_vien])
+}
+
+
+
+model Hoi_Vien {
+  ma_hoi_vien Int @id @default(autoincrement())
+
+  nguoi_dung Nguoi_Dung[]
+}

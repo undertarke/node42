@@ -120,3 +120,13 @@ const specs = swaggerJsDoc(options);
 
 app.use("/swagger", swaggerUi.serve, swaggerUi.setup(specs));
 
+
+
+
+// connection, Code first, Database first, findAll(),create,update,destroy,....
+// prisma ORM
+// B1: yarn add prisma @prisma/client
+// B2: yarn prisma init      => generate tự động cấu trúc prisma
+// B3: update info .env and schema.prisma
+// B4: yarn prisma db pull    => Database first
+// B5: yarn prisma generate
