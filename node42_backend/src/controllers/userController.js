@@ -99,8 +99,14 @@ const loginFacebook = async (req, res) => {
 
 }
 
+const getUser = async (req, res) => {
+    let data = await model.users.findAll()
+    responseSend(res, data, "Thành công !", 200)
+}
+
 export {
     signUp,
     login,
-    loginFacebook
+    loginFacebook,
+    getUser
 }

@@ -81,3 +81,12 @@ export const uploadCloudinary = async (formData) => {
   const { data } = await axios.post(`https://api.cloudinary.com/v1_1/dghvdbogx/upload`,formData)
   return data
 }
+
+
+
+
+export const getUserApi = async () => {
+  const { data } = await axios.get(`${BASE_URL}/user/get-user`, options);
+
+  return data.content
+}

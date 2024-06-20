@@ -9,15 +9,17 @@ import SignUp from "./components/SignUp";
 import Footer from "./components/Footer";
 import FeedPage from "./components/FeedPage";
 
+
 const App = () => (
   <BrowserRouter>
+
     <Box sx={{ backgroundColor: '#000' }}>
       <Navbar />
       <Routes>
         <Route exact path='/' element={<FeedPage />} />
         <Route exact path='/:page' element={<FeedPage />} />
 
-        
+
         <Route exact path='/videoType/:id' element={<Feed />} />
 
         <Route path='/video/:id' element={<VideoDetail />} />

@@ -1,8 +1,10 @@
 import express from "express";
-import { login, loginFacebook, signUp } from "../controllers/userController.js";
+import { getUser, login, loginFacebook, signUp } from "../controllers/userController.js";
 
 
 const userRouter = express.Router();
+
+userRouter.get("/get-user",getUser)
 
 // signup
 userRouter.post("/sign-up",signUp)

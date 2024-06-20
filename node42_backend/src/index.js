@@ -101,7 +101,7 @@ app.get("/demo/:id/:hoTen", (request, response) => {
 
 
 
-import swaggerUi  from 'swagger-ui-express';
+import swaggerUi from 'swagger-ui-express';
 import swaggerJsDoc from 'swagger-jsdoc';
 
 
@@ -130,3 +130,35 @@ app.use("/swagger", swaggerUi.serve, swaggerUi.setup(specs));
 // B3: update info .env and schema.prisma
 // B4: yarn prisma db pull    => Database first
 // B5: yarn prisma generate
+
+
+// yarn add socket.io
+
+import { createServer } from "http";
+import { Server } from "socket.io";
+import { join } from 'path'
+
+const httpServer = createServer(app);
+// đối tượng socket server
+const io = new Server(httpServer, {
+    cors: {
+        origin: "*"
+    }
+});
+let number = 0
+io.on("connection", (socket) => {
+    socket.on("join-room", () => {
+        socket.join("room-2")
+    })
+
+    socket.on("fe-click", () => {
+        // gửi data về tất cả client
+        io.emit("nu-up", number++)
+    })
+
+    socket.on("send-mess", (message) => {
+        io.to("room-2").emit("server-mess", message)
+    })
+});
+
+httpServer.listen(8081); // port dành riêng cho realtime 
