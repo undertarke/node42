@@ -1,0 +1,89 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model chat {
+  id      Int       @id @unique(map: "id") @default(autoincrement())
+  user_id Int?
+  content String?   @db.VarChar(255)
+  room_id String?   @db.VarChar(20)
+  date    DateTime? @db.DateTime(0)
+}
+
+model code {
+  id      BigInt    @id @unique(map: "id") @default(autoincrement()) @db.UnsignedBigInt
+  code    String?   @db.VarChar(50)
+  expired DateTime? @db.DateTime(0)
+}
+
+model users {
+  user_id       Int             @id @default(autoincrement())
+  full_name     String?         @db.VarChar(255)
+  email         String?         @unique(map: "email") @db.VarChar(255)
+  avatar        String?         @db.VarChar(255)
+  pass_word     String?         @db.VarChar(255)
+  face_app_id   String?         @db.VarChar(255)
+  role          String?         @db.VarChar(50)
+  refresh_token String?         @db.Text
+  video         video[]
+  video_comment video_comment[]
+  video_like    video_like[]
+}
+
+model video {
+  video_id      Int             @id @default(autoincrement())
+  video_name    String?         @db.VarChar(255)
+  thumbnail     String?         @db.VarChar(255)
+  description   String?         @db.Text
+  views         Int?
+  source        String?         @db.VarChar(255)
+  user_id       Int?
+  type_id       Int?
+  users         users?          @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "video_ibfk_1")
+  video_type    video_type?     @relation(fields: [type_id], references: [type_id], onDelete: NoAction, onUpdate: NoAction, map: "video_ibfk_2")
+  video_comment video_comment[]
+  video_like    video_like[]
+
+  @@index([type_id], map: "type_id")
+  @@index([user_id], map: "user_id")
+}
+
+model video_comment {
+  comment_id  Int       @id @default(autoincrement())
+  user_id     Int?
+  video_id    Int?
+  date_create DateTime? @db.DateTime(0)
+  content     String?   @db.Text
+  reply_list  String?   @db.VarChar(255)
+  timestamp   DateTime? @db.Timestamp(0)
+  users       users?    @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "video_comment_ibfk_1")
+  video       video?    @relation(fields: [video_id], references: [video_id], onDelete: NoAction, onUpdate: NoAction, map: "video_comment_ibfk_2")
+
+  @@index([user_id], map: "user_id")
+  @@index([video_id], map: "video_id")
+}
+
+model video_like {
+  like_id     Int       @id @default(autoincrement())
+  user_id     Int?
+  video_id    Int?
+  date_create DateTime? @db.DateTime(0)
+  dis_like    Boolean?
+  users       users?    @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "video_like_ibfk_1")
+  video       video?    @relation(fields: [video_id], references: [video_id], onDelete: NoAction, onUpdate: NoAction, map: "video_like_ibfk_2")
+
+  @@index([user_id], map: "user_id")
+  @@index([video_id], map: "video_id")
+}
+
+model video_type {
+  type_id   Int     @id @default(autoincrement())
+  type_name String? @db.VarChar(255)
+  icon      String? @db.VarChar(255)
+  video     video[]
+}

@@ -6,23 +6,17 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AppModule = void 0;
+exports.VideoModule = void 0;
 const common_1 = require("@nestjs/common");
-const app_controller_1 = require("./app.controller");
-const app_service_1 = require("./app.service");
-const video_module_1 = require("./video/video.module");
-const user_module_1 = require("./user/user.module");
-const config_1 = require("@nestjs/config");
-let AppModule = class AppModule {
+const video_service_1 = require("./video.service");
+const video_controller_1 = require("./video.controller");
+let VideoModule = class VideoModule {
 };
-exports.AppModule = AppModule;
-exports.AppModule = AppModule = __decorate([
+exports.VideoModule = VideoModule;
+exports.VideoModule = VideoModule = __decorate([
     (0, common_1.Module)({
-        imports: [video_module_1.VideoModule, user_module_1.UserModule,
-            config_1.ConfigModule.forRoot({ isGlobal: true })
-        ],
-        controllers: [app_controller_1.AppController],
-        providers: [app_service_1.AppService],
+        controllers: [video_controller_1.VideoController],
+        providers: [video_service_1.VideoService],
     })
-], AppModule);
-//# sourceMappingURL=app.module.js.map
+], VideoModule);
+//# sourceMappingURL=video.module.js.map

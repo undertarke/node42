@@ -15,16 +15,20 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppController = void 0;
 const common_1 = require("@nestjs/common");
 const app_service_1 = require("./app.service");
+const swagger_1 = require("@nestjs/swagger");
 let AppController = class AppController {
     constructor(appService) {
         this.appService = appService;
     }
     getHello(req, res) {
         let { id } = req.params;
-        let { id2 } = req.query;
+        let { phone } = req.query;
+        let { email, userName } = req.body;
         return "123";
     }
-    getDemo() {
+    getDemo(id, phone, body) {
+        let { email, userName } = body;
+        return { id, phone, email, userName };
     }
 };
 exports.AppController = AppController;
@@ -37,12 +41,16 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], AppController.prototype, "getHello", null);
 __decorate([
-    (0, common_1.Get)(),
+    (0, common_1.Get)("/test/:id"),
+    __param(0, (0, common_1.Param)("id")),
+    __param(1, (0, common_1.Query)("phone")),
+    __param(2, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [String, String, Object]),
     __metadata("design:returntype", void 0)
 ], AppController.prototype, "getDemo", null);
 exports.AppController = AppController = __decorate([
+    (0, swagger_1.ApiTags)("ứng dụng"),
     (0, common_1.Controller)("/app"),
     __metadata("design:paramtypes", [app_service_1.AppService])
 ], AppController);
