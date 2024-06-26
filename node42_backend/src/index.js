@@ -162,3 +162,112 @@ io.on("connection", (socket) => {
 });
 
 httpServer.listen(8081); // port dành riêng cho realtime 
+
+
+
+// graphql
+
+// yarn add graphql express-graphql
+
+import { graphqlHTTP } from 'express-graphql'
+import { buildSchema } from 'graphql'
+
+let schema = buildSchema(`
+
+        type User {
+            id: ID
+            hoTen: String
+            email: String
+            phone: Int
+        }
+
+        type VideoType{
+            type_id: ID
+            type_name: String
+        }
+
+        type Video {
+            video_id:      ID             
+            video_name:    String        
+            thumbnail:     String        
+            description:   String       
+            views:         Int
+            source:        String        
+            user_id:       Int
+            type_id:       Int
+
+            video_type: VideoType
+        }
+
+        type Query {
+
+            getUser: [User]
+            
+            getVideo( id: Int , name: String ) : [Video]
+        }
+
+        type Mutation {
+            createUser: String
+        }
+    
+    
+`)
+
+
+
+
+
+
+
+// Quy tắc 1: tên (phương thức) hàm == tên hàm bên schema đã khai báo
+// Quy tắc 2: khi return phải giống kiểu dữ liệu đã định nghĩa ở schema
+import { PrismaClient } from '@prisma/client'
+const prisma = new PrismaClient()
+// table Video
+
+let resolver = {
+    // user : id, hoTen, email, phone
+    getUser: () => {
+        let modelUser = [{
+            id: 1,
+            hoTen: "a",
+            email: "a@gmail.com",
+            phone: 113
+        },
+        {
+            id: 2,
+            hoTen: "b",
+            email: "b@gmail.com",
+            phone: 113
+        }]
+        return modelUser
+    },
+    getVideo: async (argu) => {
+
+        let id = argu.id
+
+        // [{id,video_name}]
+        return await prisma.video.findMany({
+            where: {
+                video_id: id
+
+            },
+            include: {
+                video_type: true
+            }
+        })
+
+    },
+
+    createUser: () => {
+    }
+}
+
+app.use("/graphql", graphqlHTTP({
+    schema, // định nghĩa các đối tượng và tên hàm truy vấn (VD: abstract class)
+    rootValue: resolver, // resolver =>  định nghĩa logic đổ dữ liệu cho các hàm bên schema
+    graphiql: true // giao diện để thao tác với query Graphql
+}))
+
+
+
