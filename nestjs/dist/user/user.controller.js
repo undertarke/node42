@@ -16,8 +16,33 @@ let UserController = class UserController {
     constructor(userService) {
         this.userService = userService;
     }
+    login() {
+        try {
+            return this.userService.login();
+        }
+        catch (exception) {
+            if (exception.status && exception.status != 500)
+                throw new common_1.HttpException(exception.response, exception.status);
+            throw new common_1.HttpException("Lỗi Server", 500);
+        }
+    }
+    signUp() {
+    }
 };
 exports.UserController = UserController;
+__decorate([
+    (0, common_1.HttpCode)(200),
+    (0, common_1.Post)("/login"),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], UserController.prototype, "login", null);
+__decorate([
+    (0, common_1.Post)("/sign-up"),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], UserController.prototype, "signUp", null);
 exports.UserController = UserController = __decorate([
     (0, common_1.Controller)('user'),
     __metadata("design:paramtypes", [user_service_1.UserService])

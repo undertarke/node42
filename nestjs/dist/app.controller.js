@@ -16,6 +16,20 @@ exports.AppController = void 0;
 const common_1 = require("@nestjs/common");
 const app_service_1 = require("./app.service");
 const swagger_1 = require("@nestjs/swagger");
+class userTypeDto {
+}
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], userTypeDto.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], userTypeDto.prototype, "email", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], userTypeDto.prototype, "userName", void 0);
 let AppController = class AppController {
     constructor(appService) {
         this.appService = appService;
@@ -33,6 +47,15 @@ let AppController = class AppController {
 };
 exports.AppController = AppController;
 __decorate([
+    (0, swagger_1.ApiParam)({
+        name: "id"
+    }),
+    (0, swagger_1.ApiQuery)({
+        name: "phone"
+    }),
+    (0, swagger_1.ApiBody)({
+        type: userTypeDto
+    }),
     (0, common_1.Get)("/demo/:id"),
     __param(0, (0, common_1.Req)()),
     __param(1, (0, common_1.Res)()),
@@ -46,7 +69,7 @@ __decorate([
     __param(1, (0, common_1.Query)("phone")),
     __param(2, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, String, Object]),
+    __metadata("design:paramtypes", [String, String, userTypeDto]),
     __metadata("design:returntype", void 0)
 ], AppController.prototype, "getDemo", null);
 exports.AppController = AppController = __decorate([

@@ -1,9 +1,9 @@
 import { AppService } from './app.service';
-type userTypeDto = {
+declare class userTypeDto {
     id: number;
     email: string;
     userName: string;
-};
+}
 export declare class AppController {
     private readonly appService;
     constructor(appService: AppService);

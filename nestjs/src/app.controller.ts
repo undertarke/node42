@@ -1,11 +1,16 @@
 import { Body, Controller, Get, Param, Query, Req, Res } from '@nestjs/common';
 import { AppService } from './app.service';
 import { Request, Response } from 'express';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiParam, ApiProperty, ApiQuery, ApiTags } from '@nestjs/swagger';
 
-type userTypeDto = {
-  id: number,
-  email: string,
+class userTypeDto {
+  @ApiProperty()
+  id: number
+
+  @ApiProperty()
+  email: string
+
+  @ApiProperty()
   userName: string
 }
 
@@ -15,6 +20,15 @@ export class AppController {
   constructor(private readonly appService: AppService) { }
 
 
+  @ApiParam({
+    name: "id"
+  })
+  @ApiQuery({
+    name: "phone"
+  })
+  @ApiBody({
+    type: userTypeDto
+  })
   @Get("/demo/:id")
   getHello(@Req() req, @Res() res) {
     let { id } = req.params
@@ -30,16 +44,16 @@ export class AppController {
     @Param("id") id: string,
     @Query("phone") phone: string,
     @Body() body: userTypeDto,
-    
+
   ) {
-    
+
     let { email, userName } = body
 
     return { id, phone, email, userName }
 
   }
 
-  
+
 
 }
 

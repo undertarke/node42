@@ -13,6 +13,7 @@ const app_service_1 = require("./app.service");
 const video_module_1 = require("./video/video.module");
 const user_module_1 = require("./user/user.module");
 const config_1 = require("@nestjs/config");
+const jwt_strategy_1 = require("./strategy/jwt.strategy");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -22,7 +23,7 @@ exports.AppModule = AppModule = __decorate([
             config_1.ConfigModule.forRoot({ isGlobal: true })
         ],
         controllers: [app_controller_1.AppController],
-        providers: [app_service_1.AppService],
+        providers: [app_service_1.AppService, jwt_strategy_1.JwtStrategy],
     })
 ], AppModule);
 //# sourceMappingURL=app.module.js.map

@@ -9,7 +9,8 @@ async function bootstrap() {
   app.enableCors() // mở CORS
   app.use(express.static(".")) //định vị lại đường load file
 
-  const config = new DocumentBuilder().setTitle("node 42").build()
+  const config = new DocumentBuilder().setTitle("node 42").addBearerAuth().build()
+
   const document = SwaggerModule.createDocument(app, config)
   SwaggerModule.setup("/swagger", app, document)
 

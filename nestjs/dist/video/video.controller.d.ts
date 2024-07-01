@@ -7,7 +7,7 @@ export declare class VideoController {
     upload(file: Express.Multer.File): Express.Multer.File;
     uploadMultiple(file: Express.Multer.File[]): Express.Multer.File[];
     create(createVideoDto: CreateVideoDto): string;
-    findAll(): Promise<{
+    findAll(req: any): Promise<{
         video_id: number;
         video_name: string | null;
         thumbnail: string | null;

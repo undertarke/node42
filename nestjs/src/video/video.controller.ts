@@ -1,17 +1,31 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFile, UploadedFiles } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFile, UploadedFiles, UseGuards, Req } from '@nestjs/common';
 import { VideoService } from './video.service';
 import { CreateVideoDto } from './dto/create-video.dto';
 import { UpdateVideoDto } from './dto/update-video.dto';
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiConsumes, ApiProperty, ApiTags } from '@nestjs/swagger';
+import { AuthGuard } from '@nestjs/passport';
 
+
+class UploadTypeDto {
+  @ApiProperty({ type: 'string', format: 'binary' })
+  hinhAnh: any;
+}
+
+
+@ApiBearerAuth()
+@UseGuards(AuthGuard("CHECK_TOKEN"))
 @ApiTags("vi déo")
 @Controller('video')
 export class VideoController {
   constructor(private readonly videoService: VideoService) { }
   // yarn add @types/multer
 
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    type: UploadTypeDto
+  })
   @UseInterceptors(FileInterceptor("hinhAnh", {
     storage: diskStorage({
       destination: process.cwd() + "/public/img",
@@ -31,7 +45,7 @@ export class VideoController {
     })
   }))
   @Post("/upload-multiple")
-  uploadMultiple(@UploadedFiles() file:  Express.Multer.File[]) {
+  uploadMultiple(@UploadedFiles() file: Express.Multer.File[]) {
     return file
   }
 
@@ -50,8 +64,12 @@ export class VideoController {
     return this.videoService.create(createVideoDto);
   }
 
+  
   @Get()
-  findAll() {
+  findAll(@Req() req) {
+
+    let data = req.user
+
     return this.videoService.findAll();
   }
 

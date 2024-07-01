@@ -9,22 +9,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserService = void 0;
+exports.JwtStrategy = void 0;
+const passport_jwt_1 = require("passport-jwt");
+const passport_1 = require("@nestjs/passport");
 const common_1 = require("@nestjs/common");
-const jwt_1 = require("@nestjs/jwt");
-let UserService = class UserService {
-    constructor(jwtService) {
-        this.jwtService = jwtService;
+const config_1 = require("@nestjs/config");
+let JwtStrategy = class JwtStrategy extends (0, passport_1.PassportStrategy)(passport_jwt_1.Strategy, "CHECK_TOKEN") {
+    constructor(config) {
+        super({
+            jwtFromRequest: passport_jwt_1.ExtractJwt.fromAuthHeaderAsBearerToken(),
+            ignoreExpiration: false,
+            secretOrKey: "BI_MAT",
+        });
     }
-    login() {
-        let token = this.jwtService.sign({ data: "abc" }, { algorithm: "HS256", expiresIn: "5d", secret: "BI_MAT" });
-        throw new common_1.HttpException("sai email ,pass", 403);
-        return token;
+    async validate(tokenDecode) {
+        return tokenDecode;
     }
 };
-exports.UserService = UserService;
-exports.UserService = UserService = __decorate([
+exports.JwtStrategy = JwtStrategy;
+exports.JwtStrategy = JwtStrategy = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [jwt_1.JwtService])
-], UserService);
-//# sourceMappingURL=user.service.js.map
+    __metadata("design:paramtypes", [config_1.ConfigService])
+], JwtStrategy);
+//# sourceMappingURL=jwt.strategy.js.map

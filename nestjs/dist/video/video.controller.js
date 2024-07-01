@@ -20,6 +20,13 @@ const update_video_dto_1 = require("./dto/update-video.dto");
 const platform_express_1 = require("@nestjs/platform-express");
 const multer_1 = require("multer");
 const swagger_1 = require("@nestjs/swagger");
+const passport_1 = require("@nestjs/passport");
+class UploadTypeDto {
+}
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: 'string', format: 'binary' }),
+    __metadata("design:type", Object)
+], UploadTypeDto.prototype, "hinhAnh", void 0);
 let VideoController = class VideoController {
     constructor(videoService) {
         this.videoService = videoService;
@@ -33,7 +40,8 @@ let VideoController = class VideoController {
     create(createVideoDto) {
         return this.videoService.create(createVideoDto);
     }
-    findAll() {
+    findAll(req) {
+        let data = req.user;
         return this.videoService.findAll();
     }
     findOne(id) {
@@ -48,6 +56,10 @@ let VideoController = class VideoController {
 };
 exports.VideoController = VideoController;
 __decorate([
+    (0, swagger_1.ApiConsumes)('multipart/form-data'),
+    (0, swagger_1.ApiBody)({
+        type: UploadTypeDto
+    }),
     (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)("hinhAnh", {
         storage: (0, multer_1.diskStorage)({
             destination: process.cwd() + "/public/img",
@@ -82,8 +94,9 @@ __decorate([
 ], VideoController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)(),
+    __param(0, (0, common_1.Req)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], VideoController.prototype, "findAll", null);
 __decorate([
@@ -109,6 +122,8 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], VideoController.prototype, "remove", null);
 exports.VideoController = VideoController = __decorate([
+    (0, swagger_1.ApiBearerAuth)(),
+    (0, common_1.UseGuards)((0, passport_1.AuthGuard)("CHECK_TOKEN")),
     (0, swagger_1.ApiTags)("vi déo"),
     (0, common_1.Controller)('video'),
     __metadata("design:paramtypes", [video_service_1.VideoService])
