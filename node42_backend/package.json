@@ -5,7 +5,8 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "start": "node --env-file=.env --watch src/index.js"
+    "start": "node --env-file=.env --watch src/index.js",
+    "prod":"node --env-file=.env src/index.js"
   },
   "dependencies": {
     "@prisma/client": "^5.15.0",
